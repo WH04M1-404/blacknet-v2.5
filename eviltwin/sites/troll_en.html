@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>NOT SAFE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #000;
+      color: #00ffcc;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .box {
+      background-color: #111;
+      padding: 30px 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00ffcc88;
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    h1 {
+      font-size: 20px;
+      color: #ff0055;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 15px;
+      color: #ddd;
+    }
+
+    button {
+      background-color: #00ffcc;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 15px;
+      width: 100%;
+    }
+
+    input {
+      margin-top: 15px;
+      padding: 10px;
+      font-size: 15px;
+      width: 100%;
+      border: none;
+      border-radius: 6px;
+      text-align: center;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box" id="step1">
+    <h1>Warning</h1>
+    <p>?You will be happy if i hacked you</p>
+    <p>!!Do not enter public networks again OK</p>
+    <button onclick="nextStep()">JOIN NETWORK</button>
+  </div>
+
+  <div class="box hidden" id="step2">
+    <h1>????</h1>
+    <p>REALLY.. YOU KNOW WHAT??</p>
+    <p>Enter your password dude</p>
+    <input type="password" id="fakepass" placeholder="Password">
+    <button onclick="finalStep()">LOGIN</button>
+  </div>
+
+  <div class="box hidden" id="step3">
+    <h1>Alright bro thanks</h1>
+    <p>Duuhh</p>
+  </div>
+
+  <script>
+    function nextStep() {
+      document.getElementById('step1').classList.add('hidden');
+      document.getElementById('step2').classList.remove('hidden');
+    }
+
+    function finalStep() {
+      const pass = document.getElementById('fakepass').value;
+      document.getElementById('step2').classList.add('hidden');
+      document.getElementById('step3').classList.remove('hidden');
+      console.log("Fake password entered:", pass);
+    }
+  </script>
+
+</body>
+</html>
