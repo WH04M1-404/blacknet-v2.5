@@ -1,0 +1,12 @@
+{
+    "http": [
+        { "name": "Reboot TV", "path": "/api/system/reboot", "method": "POST" },
+        { "name": "Display Custom Message", "path": "/api/display/message", "method": "POST" }
+    ],
+    "ws": [
+        { "name": "Volume Up", "command": "volume_up" },
+        { "name": "Volume Down", "command": "volume_down" },
+        { "name": "Mute Audio", "command": "mute" },
+        { "name": "Change Source", "command": "source_hdmi1" }
+    ]
+}

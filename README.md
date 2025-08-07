@@ -1,5 +1,5 @@
 # BL4CKN3T WIRELESS ATTACKS FRAMEWORK
-> **Wireless HACK Engine v2.7**  
+> **Wireless HACK Engine v2.5**  
 > Developed by: `WH04M1`
 
 ---
@@ -12,12 +12,39 @@
 
 * more captive portals added to the evil twin tool [blacktwin]
 
-* Sniffing with ip resolution added to the evil twin tool [blacktwin]
+* 3 New tools added [whonet] - [whonetp] - [trrt]
+
+* whonet for fast network scan with mac's [whonet]
+
+* whonetp for fast network scan with mac's and common ports [whonetp]
+
+* trrt smart traceroute with domain/country resolve [trrt]
 
 * blackwifi-GUI fully upgraded with real-time scanning - deauth - deauth clients - upgraded GUI [blackwifi]
 
-* APS list was modified in the beacon attack tool [blackvision]
+* Main script upgrades [blacknet]
 
+* Smart Screens hacking tool fully upgraded with more easy CLI and bug fix [trc]
+
+* BL4CKWIFI-CLI is here again with all bugs fixed [blackwifi]
+
+* Iot Discovery tool internal [iotin]
+
+* Iot Discovery tool external [iotex]
+
+* WPS cracker based on PIN database  [wph]
+
+## IN THE WAY
+
+* IP Cameras exploitation toolkit
+
+* Network scanning tool GUI
+
+* MITM Tool GUI
+
+* PMKID capture 
+
+* Bluetooth exploitation toolkit
 ---
 
 ## Requirements
@@ -49,7 +76,7 @@ The script will **auto-check and install** the following if missing:
 
 ### SAVING
 
-* all victims credintials saved in /blacknet/html/log.txt
+* all victims credintials saved in /blacknet/eviltwin/html/log.txt in the evil twin tool [blacktwin]
 
 ## EVIL TWIN TOOL
 
@@ -83,15 +110,13 @@ The script will **auto-check and install** the following if missing:
 
 * /blacknet/smartscreens
 
+# FOR SCANNING TOOLS
+
+* /blacknet/rc
+
 ## these tools requires wifi card that supports:
 
 [AP - Monitor Mode - Packet Injection]
 
 
-                                                                      **x HAPPY HACK!! x**
-                                                                   __________________________
-                                                                      ___________________
-                                                                         _____________
-                                                                            _______
-                                                                               _
-                                                     
+## THANKS FOR SHOPPING WITH BL4CKN3T !!
